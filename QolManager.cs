@@ -18,6 +18,8 @@ internal static class QoLManager
     {
         var instance = Singleton<SpecialSongManager>.instance;
 
+        YumeOuManager.ActivateYume();
+
         instance.m_HideBmsInfos["4-5"] = new SpecialSongManager.HideBmsInfo("4-5", 2, 4, "goodtek_map4");
         instance.m_HideBmsInfos["8-3"] = new SpecialSongManager.HideBmsInfo("8-3", -1, 4, "sweet_witch_girl_map4");
         instance.SetBarrageMode(true);
@@ -90,9 +92,11 @@ internal static class QoLManager
         return (difficultyText, levelDesignerText);
     }
 
-    private static void DeactivateAllHidden()
+    internal static void DeactivateAllHidden()
     {
         var instance = Singleton<SpecialSongManager>.instance;
+
+        YumeOuManager.DisableYume();
 
         instance.m_HideBmsInfos["4-5"] = new SpecialSongManager.HideBmsInfo("4-5", 2, 4, "goodtek_map4",
             new Func<bool>(() => instance.m_GameInTime is { Month: 4, Day: 1 }));
